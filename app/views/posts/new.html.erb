@@ -1,0 +1,33 @@
+<!-- <form class="new-post" action="/posts" method="post"> -->
+<!-- <div class="post-field"> -->
+<!-- <label>Title: </label> <br/> -->
+<!-- <input type="text" name="title"> -->
+<!-- </div>  -->
+
+<!-- <div class="post-field"> -->
+<!-- <label>Content: </label> <br/> -->
+<!-- <input type="textarea" name="content"> -->
+<!-- </div> -->
+
+<!-- <button type="submit">Create Post!</button> -->
+<!-- </form> -->
+
+<div class="side_padding_div">
+  <%=  form_tag(create_post_path) do %>
+      <div class="post-field">
+          <%= label_tag("Title: ") %>
+          <%= text_field_tag("title") %>
+      </div>
+
+      <div class="post-field">
+          <%= label_tag("Content: ") %>
+          <%= text_area_tag("content") %>
+      </div>
+
+      <button class="btn waves-effect waves-light" type="submit" name="action">
+        Create Post
+      </button>
+  <% end %>
+
+  <%= link_to("Return to Homepage", root_path) %>
+</div>

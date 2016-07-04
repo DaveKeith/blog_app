@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BlogApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <% if current_user %>
+  <nav>
+    <div class="left nav-wrapper">
+      <div class="side_padding_div">
+        Hello <%= User.find_by(id: session[:user_id]).username %>
+      </div>
+    </div>
+    </div>
+    <div class="right nav-wrapper">
+      <div class="side_padding_div">
+        <%= link_to("Logout", logouts_path(id: session[:user_id])) %>
+      </div>
+    </div>
+  </nav>
+  <% else %>
+  <nav>
+    <div class="right nav-wrapper">
+      <div class="side_padding_div">
+        <%= link_to("Sign In Here", logins_path) %>
+      </div>
+    </div>
+  </nav>
+  <% end %>
+
+<%= yield %>
+
+</body>
+</html>

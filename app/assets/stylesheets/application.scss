@@ -1,0 +1,81 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "materialize";
+
+.side_padding_div{
+  padding-left: 40px;
+  padding-right: 40px;
+}
+nav{
+  background-color: dodgerblue;
+}
+.nav-wrapper{
+  border-left: 4px solid silver;
+  border-right: 4px solid silver;
+}
+.top_left_link{
+  padding: 20px;
+}
+.title_div{
+  font-size: xx-large;
+  padding: 20px;
+  font-style: oblique;
+  border-bottom: 2px solid silver;
+}
+.collapsible{
+  width: 750px;
+  padding: 15px;
+}
+.poster{
+  float: right;
+  font-size: x-small;
+  font-style: italic;
+}
+.poster2{
+  font-style: oblique;
+  color: grey;
+}
+.comments_intro{
+  font-size: x-large;
+  padding-left: 10px;
+  font-style: oblique;
+}
+.card{
+  width: 750px;
+  padding-left: 50px;
+}
+.card-panel{
+  width: 750px;
+  font-size: x-large;
+}
+.login-field{
+  width: 400px;
+}
+.post-field{
+  width: 600px;
+}
+.votes{
+  padding-left: 550px;
+}
+.material-icons{
+  padding-left: 20px;
+}
+.upvoted{
+  color: green;
+}
+.downvoted{
+  color: red;
+}

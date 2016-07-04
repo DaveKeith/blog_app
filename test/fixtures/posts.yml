@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  content: MyText
+  user_id: 1
+  last_post_update: 2016-06-30 19:27:01
+  upvotes: 1
+  downvotes: 1
+  views: 1
+  pic_file_name: MyString
+  pic_content_type: MyString
+  pic_file_size: 1
+  pic_updated_at: 2016-06-30 19:27:01
+
+two:
+  title: MyString
+  content: MyText
+  user_id: 1
+  last_post_update: 2016-06-30 19:27:01
+  upvotes: 1
+  downvotes: 1
+  views: 1
+  pic_file_name: MyString
+  pic_content_type: MyString
+  pic_file_size: 1
+  pic_updated_at: 2016-06-30 19:27:01

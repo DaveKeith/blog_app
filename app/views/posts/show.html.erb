@@ -1,0 +1,81 @@
+<div class="side_padding_div">
+  <div class="top_left_link">
+    <%= link_to("Return to Homepage", root_path) %>
+  </div>
+
+  <div class="poster2">
+    <% poster= User.find_by(id: @post.user_id) %>
+    posted by <%= poster.username %>
+    <%= time_ago_in_words(@post.updated_at) %> ago
+  </div>
+
+  <div class="card-panel blue">
+    <span class="white-text">
+      <b><u>title:</b></u>  <%=@post.title %></br>
+      <b><u>content:</b></u>  <%=@post.content %>
+    </span>
+  </div>
+
+  <div class="comments_intro">
+    Comments:
+  </div>
+
+  <div class="comments">
+    <% @post.comments.each do |comment| %>
+      <% if current_user %>
+        <% u_id = current_user.id %>
+      <% else %>
+        <% u_id = 0 %>
+      <% end %>
+        <div class="card">
+          <span class="card-title">
+            <%= comment.body %>
+          </span>
+            <p><i>comment posted by
+              <% poster= User.find_by(id: comment.user_id) %>
+            <b><u><%= poster.username %></u></b>
+            <%= time_ago_in_words(comment.updated_at) %> ago </i>
+            <div class="votes">
+              <% votes = CommentVote.where(:user_id => current_user.id, :comment_id => comment.id) %>
+              <% if votes[0].upvote == true && votes[0].downvote == false%>
+                <div class="upvoted">upvoted</div>
+                <%= link_to image_tag("thumbs-up-512.png", {height: 25}), comment_vote_undo_path(comment.id) %>
+                <%= comment.upvotes %>
+                <%= link_to image_tag("thumbs-down-512.png", {height: 25}), comment_vote_undo_path(comment.id) %>
+                <%= comment.downvotes %>
+              <% elsif votes[0].upvote == false && votes[0].downvote == true%>
+                <div class="downvoted">downvoted</div>
+                <%= link_to image_tag("thumbs-up-512.png", {height: 25}), comment_vote_undo_path(comment.id) %>
+                <%= comment.upvotes %>
+                <%= link_to image_tag("thumbs-down-512.png", {height: 25}), comment_vote_undo_path(comment.id) %>
+                <%= comment.downvotes %>
+              <% elsif votes[0].upvote == false && votes[0].downvote == false%>
+                <div class="vote_here">vote here</div>
+                <%= link_to image_tag("thumbs-up-512.png", {height: 25}), comment_upvote_path(comment.id) %>
+                <%= comment.upvotes %>
+                <%= link_to image_tag("thumbs-down-512.png", {height: 25}), comment_downvote_path(comment.id) %>
+                <%= comment.downvotes %>
+              <% end %>
+            </div>
+            <% if comment.user_id == u_id %>
+            <div class="card-action">
+              <%= link_to("Delete Comment", delete_comment_path(comment.id)) %>
+            </div>
+            <% end %>
+        </div>
+    <% end %>
+  </div>
+  </br>
+  <%=  form_tag(comment_on_post_path(@post.id)) do %>
+      <div class="post-field">
+          <b><%= label_tag("Write Comment Here: ") %></b> <br/>
+          <%= text_area_tag("body") %>
+      </div>
+
+      <button class="btn waves-effect waves-light" type="submit" name="action">
+        Post Comment
+      </button>
+  <% end %>
+</div>
+<% scope = @post.comments.page(params[:page]).per(10) %>
+  <%= paginate(scope) %>

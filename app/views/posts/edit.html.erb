@@ -1,0 +1,19 @@
+<div class="side_padding_div">
+  <h3>Update Post</h3>
+  <%=  form_tag(post_update_path(@post), method: :patch) do %>
+      <div class="post-field">
+          <%= label_tag("Title: ") %>
+          <%= text_field_tag("title", @post.title) %>
+      </div>
+
+      <div class="post-field">
+          <%= label_tag("Content: ") %>
+          <%= text_area_tag("content", @post.content) %>
+      </div>
+
+      <button class="btn waves-effect waves-light" type="submit" name="action">
+        Update Post
+      </button>
+  <% end %>
+  <%= link_to("Return to Homepage", root_path) %>
+</div>

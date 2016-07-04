@@ -1,0 +1,61 @@
+<div class="side_padding_div">
+  <div class="top_left_link">
+    <% if current_user %>
+      <%= link_to("Add a New Post!", posts_new_path) %>
+    <% end %>
+  </div>
+
+  <div class="title_div">
+    BLOG POSTINGS
+  </div>
+
+    <% @posts.each do |post| %>
+          <div class="card grey lighten-4">
+            <span class="card-title">
+              <b>Title:</b> <%= post.title %>
+              <div class="poster">
+                <% poster= User.find_by(id: post.user_id) %>
+                posted by <b><u><%= poster.username %></u></b>
+                <%= time_ago_in_words(post.updated_at) %> ago
+              </div>
+            </span>
+              <div class="content_title">
+                <b>Content:</b>
+                <i><%= post.content %></i>
+              </div>
+              <ul class="options">
+                <li><%=link_to("display post (lets you view and make comments)",
+              posts_display_path(post.id)) %></li>
+                <% if session[:user_id] == post.user_id %>
+                <li><%=link_to("edit post ", posts_edit_path(post.id)) %></li>
+                <li><%=link_to("delete post ", posts_delete_path(post.id)) %></li>
+                <% end %>
+            </ul>
+            <div class="votes">
+              <% votes = PostVote.where(:user_id => current_user.id, :post_id => post.id) %>
+              <% if votes[0].upvote == true && votes[0].downvote == false%>
+                <div class="upvoted">upvoted</div>
+                <%= link_to image_tag("thumbs-up-512.png", {height: 25}), post_vote_undo_path(post.id) %>
+                <%= post.upvotes %>
+                <%= link_to image_tag("thumbs-down-512.png", {height: 25}), post_vote_undo_path(post.id) %>
+                <%= post.downvotes %>
+              <% elsif votes[0].upvote == false && votes[0].downvote == true%>
+                <div class="downvoted">downvoted</div>
+                <%= link_to image_tag("thumbs-up-512.png", {height: 25}), post_vote_undo_path(post.id) %>
+                <%= post.upvotes %>
+                <%= link_to image_tag("thumbs-down-512.png", {height: 25}), post_vote_undo_path(post.id) %>
+                <%= post.downvotes %>
+              <% elsif votes[0].upvote == false && votes[0].downvote == false%>
+                <div class="vote_here">vote here</div>
+                <%= link_to image_tag("thumbs-up-512.png", {height: 25}), post_upvote_path(post.id) %>
+                <%= post.upvotes %>
+                <%= link_to image_tag("thumbs-down-512.png", {height: 25}), post_downvote_path(post.id) %>
+                <%= post.downvotes %>
+              <% end %>
+            </div>
+          </div>
+    <% end %>
+  </ul>
+</div>
+<% scope = Post.all.page(params[:page]).per(10) %>
+  <%= paginate(scope) %>

@@ -24,16 +24,13 @@ Rails.application.routes.draw do
   get "posts/:id/delete", to: "posts#delete", as: "posts_delete"
 
   get "logins/new", to: "logins#new", as: "logins"
-  get "logins", to: "logins#show", as: "show_login"
   post "logins", to: "logins#create", as: "create_login"
   get "logins/:id/delete", to: "logins#delete", as: "logouts"
 
   get "new_users/new", to: "new_users#new", as: "users_new"
   post "new_users", to: "new_users#create", as: "register_users"
 
-  get "posts/:id", to: "comments#new", as: "new_comments"
   post "posts/:id", to: "comments#create", as: "comment_on_post"
-  get "posts/:id/edit", to: "comments#edit", as: "comments_edit"
   get "comments/:id/delete", to: "comments#delete", as: "delete_comment"
 
   get "posts/:id/upvote", to: "post_votes#upvote", as: "post_upvote"

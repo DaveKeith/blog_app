@@ -32,25 +32,39 @@
                 <% end %>
             </ul>
             <div class="votes">
-              <% votes = PostVote.where(:user_id => current_user.id, :post_id => post.id) %>
-              <% if votes[0].upvote == true && votes[0].downvote == false%>
-                <div class="upvoted">upvoted</div>
-                <%= link_to image_tag("thumbs-up-512.png", {height: 25}), post_vote_undo_path(post.id) %>
-                <%= post.upvotes %>
-                <%= link_to image_tag("thumbs-down-512.png", {height: 25}), post_vote_undo_path(post.id) %>
-                <%= post.downvotes %>
-              <% elsif votes[0].upvote == false && votes[0].downvote == true%>
-                <div class="downvoted">downvoted</div>
-                <%= link_to image_tag("thumbs-up-512.png", {height: 25}), post_vote_undo_path(post.id) %>
-                <%= post.upvotes %>
-                <%= link_to image_tag("thumbs-down-512.png", {height: 25}), post_vote_undo_path(post.id) %>
-                <%= post.downvotes %>
-              <% elsif votes[0].upvote == false && votes[0].downvote == false%>
-                <div class="vote_here">vote here</div>
-                <%= link_to image_tag("thumbs-up-512.png", {height: 25}), post_upvote_path(post.id) %>
-                <%= post.upvotes %>
-                <%= link_to image_tag("thumbs-down-512.png", {height: 25}), post_downvote_path(post.id) %>
-                <%= post.downvotes %>
+              <% if current_user %>
+                <% votes = PostVote.where(:user_id => current_user.id, :post_id => post.id) %>
+                <% if !votes[0] %>
+                  <div class="vote_here">vote here</div>
+                  <%= link_to image_tag("thumbs-up-512.png", {height: 25}), post_upvote_path(post.id) %>
+                  <%= post.upvotes %>
+                  <%= link_to image_tag("thumbs-down-512.png", {height: 25}), post_downvote_path(post.id) %>
+                  <%= post.downvotes %>
+                <% elsif votes[0].upvote == true && votes[0].downvote == false%>
+                  <div class="upvoted">upvoted</div>
+                  <%= link_to image_tag("thumbs-up-512.png", {height: 25}), post_vote_undo_path(post.id) %>
+                  <%= post.upvotes %>
+                  <%= link_to image_tag("thumbs-down-512.png", {height: 25}), post_vote_undo_path(post.id) %>
+                  <%= post.downvotes %>
+                <% elsif votes[0].upvote == false && votes[0].downvote == true%>
+                  <div class="downvoted">downvoted</div>
+                  <%= link_to image_tag("thumbs-up-512.png", {height: 25}), post_vote_undo_path(post.id) %>
+                  <%= post.upvotes %>
+                  <%= link_to image_tag("thumbs-down-512.png", {height: 25}), post_vote_undo_path(post.id) %>
+                  <%= post.downvotes %>
+                <% else%>
+                  <div class="vote_here">vote here</div>
+                  <%= link_to image_tag("thumbs-up-512.png", {height: 25}), post_upvote_path(post.id) %>
+                  <%= post.upvotes %>
+                  <%= link_to image_tag("thumbs-down-512.png", {height: 25}), post_downvote_path(post.id) %>
+                  <%= post.downvotes %>
+                <% end %>
+              <% else %>
+                  <div class="vote_here">log in to vote</div>
+                  <%= image_tag("thumbs-up-512.png", {height: 25}) %>
+                  <%= post.upvotes %>
+                  <%= image_tag("thumbs-down-512.png", {height: 25}) %>
+                  <%= post.downvotes %>
               <% end %>
             </div>
           </div>

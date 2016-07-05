@@ -15,9 +15,6 @@ class PostsController < ApplicationController
                            upvotes: 0,
                            downvotes: 0,
                            views: 0)
-    @post_vote = @post.post_votes.create(user_id: current_user.id,
-                                          upvote: false,
-                                          downvote: false)
     redirect_to :root
   end
 

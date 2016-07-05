@@ -15,10 +15,6 @@ class LoginsController < ApplicationController
     end
   end
 
-  def show
-    @user = @user.find(params["id"])
-  end
-
   def delete
     session[:user_id] = nil
     redirect_to :root

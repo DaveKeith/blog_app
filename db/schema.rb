@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160701035651) do
+ActiveRecord::Schema.define(version: 20160705144730) do
 
   create_table "comment_votes", force: :cascade do |t|
     t.boolean  "upvote"
@@ -24,8 +24,6 @@ ActiveRecord::Schema.define(version: 20160701035651) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "upvotes"
-    t.integer  "downvotes"
     t.string   "pic_file_name"
     t.string   "pic_content_type"
     t.integer  "pic_file_size"
@@ -49,8 +47,6 @@ ActiveRecord::Schema.define(version: 20160701035651) do
     t.string   "title"
     t.text     "content"
     t.integer  "user_id"
-    t.integer  "upvotes"
-    t.integer  "downvotes"
     t.integer  "views"
     t.string   "pic_file_name"
     t.string   "pic_content_type"

@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   get "new_users/new", to: "new_users#new", as: "users_new"
   get "profile/:id", to: "new_users#show", as: "profile"
-  get "profile/:id", to: "new_users#edit", as: "edit_profile"
+  get "profile/:id/edit", to: "new_users#edit", as: "edit_profile"
   get "profile/:id/update", to: "new_users#update", as: "update_profile"
   post "new_users", to: "new_users#create", as: "register_users"
 

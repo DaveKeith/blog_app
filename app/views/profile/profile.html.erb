@@ -1,0 +1,15 @@
+<div class="side_padding_div">
+  <h2><%= current_user.username %>'s profile</h2>
+  <% if current_user %>
+    <%= link_to("Edit Profile", edit_profile_path(current_user.id)) %><br><br>
+  <% end %>
+  <b>Username: </b><%= current_user.username %><br>
+  <b>Email: </b><%= current_user.email %><br>
+  <b>Stats: </b><br>
+  <br>
+  <b>Posts and Comments:</b>
+
+  <p>
+  <%= link_to("Return to Login Page", logins_path) %></br>
+  <%= link_to("Return to Homepage", root_path) %>
+</div>

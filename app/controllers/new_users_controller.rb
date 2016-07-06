@@ -18,12 +18,12 @@ class NewUsersController < ApplicationController
 
   def show
     @user = User.find(params["id"])
-    render :show
+    render "profile/profile.html.erb"
   end
 
   def edit
     @user = User.find(params["id"])
-    render :edit
+    render "profile/edit_profile.html.erb"
   end
 
   def update

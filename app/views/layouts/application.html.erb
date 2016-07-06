@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BlogApp</title>
+  <title>
+    <% if current_user %>
+      <%= current_user.username %> - BlogApp
+    <% else %>
+      BlogApp
+    <% end %>
+  </title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -15,10 +21,14 @@
         Hello <%= User.find_by(id: session[:user_id]).username %>
       </div>
     </div>
-    </div>
     <div class="right nav-wrapper">
       <div class="side_padding_div">
         <%= link_to("Logout", logouts_path(id: session[:user_id])) %>
+      </div>
+    </div>
+    <div class="right nav-wrapper">
+      <div class="side_padding_div">
+        <%= link_to("View Profile", profile_path(id: session[:user_id])) %>
       </div>
     </div>
   </nav>

@@ -1,18 +1,19 @@
 <div class="side_padding_div">
   <div class="top_left_link">
-    <%= link_to("Return to Homepage", root_path) %>
+    <%= link_to("Return to Homepage", root_path) %><br>
+    <% @parent_comment = Comment.find(params["id"]) %>
+    <%= link_to("Return to Post", posts_display_path(@parent_comment.post_id)) %>
   </div>
 
   <div class="poster2">
-    <% poster= User.find_by(id: @post.user_id) %>
-    posted by <%= poster.username %>
-    <%= time_ago_in_words(@post.updated_at) %> ago
+    <% commenter= User.find_by(id: @parent_comment.user_id) %>
+    comment posted by <%= commenter.username %>
+    <%= time_ago_in_words(@parent_comment.updated_at) %> ago
   </div>
 
   <div class="card-panel blue">
     <span class="white-text">
-      <b><u>title:</b></u>  <%=@post.title %></br>
-      <b><u>content:</b></u>  <%=@post.content %>
+      <b><u>Comment:</b></u>  <%=@parent_comment.body %>
     </span>
   </div>
 
@@ -21,7 +22,8 @@
   </div>
 
   <div class="comments">
-    <% @post.comments.each do |comment| %>
+    <% child_comments = Comment.where(comment_id: @parent_comment.id) %>
+    <% child_comments.each do |comment| %>
       <% if current_user %>
         <% u_id = current_user.id %>
       <% else %>
@@ -80,7 +82,7 @@
     <% end %>
   </div>
   </br>
-  <%=  form_tag(comment_on_post_path(@post.id)) do %>
+  <%=  form_tag(comment_on_comment_path(@parent_comment.id)) do %>
       <div class="post-field">
           <b><%= label_tag("Write Comment Here: ") %></b> <br/>
           <%= text_area_tag("body") %>
@@ -91,5 +93,3 @@
       </button>
   <% end %>
 </div>
-<% scope = @post.comments.page(params[:page]).per(10) %>
-  <%= paginate(scope) %>

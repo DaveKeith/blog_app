@@ -11,8 +11,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.create(title: params["title"],
-                           content: params["content"],
-                           views: 0)
+                           content: params["content"])
     redirect_to :root
   end
 

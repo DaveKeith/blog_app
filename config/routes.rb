@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   post "new_users", to: "new_users#create", as: "register_users"
 
   post "posts/:id", to: "comments#create", as: "comment_on_post"
+  post "comments/:id", to: "comments#create2", as: "comment_on_comment"
+  get "comments/:id", to: "posts#show_comment", as: "comments_display"
   get "comments/:id/delete", to: "comments#delete", as: "delete_comment"
 
   get "posts/:id/upvote", to: "post_votes#upvote", as: "post_upvote"

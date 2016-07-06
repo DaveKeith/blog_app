@@ -3,6 +3,10 @@
     <%= link_to("Return to Homepage", root_path) %><br>
     <% @parent_comment = Comment.find(params["id"]) %>
     <%= link_to("Return to Post", posts_display_path(@parent_comment.post_id)) %>
+    <% grandparent_comment = Comment.find_by(id: @parent_comment.comment_id) %>
+    <% if grandparent_comment %>
+      <br><%= link_to("Return to Previous Comment", comments_display_path(grandparent_comment.id)) %>
+    <% end %>
   </div>
 
   <div class="poster2">

@@ -5,6 +5,7 @@ class NewUsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    # UserMailer.welcome_email(@user).deliver
     if @user.save
       if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id

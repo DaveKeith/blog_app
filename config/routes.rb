@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   get "comments/:id/upvote", to: "comment_votes#upvote", as: "comment_upvote"
   get "comments/:id/downvote", to: "comment_votes#downvote", as: "comment_downvote"
   get "comments/:id/undo", to: "comment_votes#undo", as: "comment_vote_undo"
+
+  get "mail", to: "user_mailer#mail", as: "mail"
   # Example resource route with options:
   #   resources :products do
   #     member do

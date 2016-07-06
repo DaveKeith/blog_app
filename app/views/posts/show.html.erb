@@ -31,12 +31,21 @@
           <span class="card-title">
             <%= comment.body %>
           </span>
+          <div class="links_and_info">
             <p><i>comment posted by
               <% poster= User.find_by(id: comment.user_id) %>
             <b><u><%= poster.username %></u></b>
             <%= time_ago_in_words(comment.updated_at) %> ago </i><br>
             <%=link_to("display comment (lets you view and make comments)",
-          comments_display_path(comment.id)) %>
+          comments_display_path(comment.id)) %><br><br>
+          <% num_of_comments = Comment.where(comment_id: comment.id) %>
+          <% if num_of_comments[0] %>
+            <i><%= num_of_comments.size %> comments (last comment made by <b><u><%= poster.username %></u></b>
+            <%= time_ago_in_words(num_of_comments.last.created_at) %> ago)</i>
+          <% else %>
+            <i>no comments</i>
+          <% end %>
+          </div>
             <div class="votes">
               <% u = CommentVote.where(:upvote => true, :comment_id => comment.id) %>
               <% d = CommentVote.where(:upvote => false, :comment_id => comment.id) %>

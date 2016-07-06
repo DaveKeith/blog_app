@@ -29,6 +29,10 @@
                 <% if session[:user_id] == post.user_id %>
                 <li><%=link_to("edit post ", posts_edit_path(post.id)) %></li>
                 <li><%=link_to("delete post ", posts_delete_path(post.id)) %></li>
+                <br>
+                <li><% num_of_comments = Comment.where(post_id: post.id) %>
+                <i><%= num_of_comments.size %> comments (last comment made by <b><u><%= poster.username %></u></b>
+                <%= time_ago_in_words(num_of_comments.last.updated_at) %> ago)</i></li>
                 <% end %>
             </ul>
             <div class="votes">

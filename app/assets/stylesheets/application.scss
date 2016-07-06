@@ -67,8 +67,12 @@ nav{
 .post-field{
   width: 600px;
 }
+ul.options{
+  display: inline-block;
+  width: 550px;
+}
 .votes{
-  padding-left: 550px;
+  display: inline-block;
 }
 .material-icons{
   padding-left: 20px;

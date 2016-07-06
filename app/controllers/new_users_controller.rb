@@ -16,6 +16,24 @@ class NewUsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find(params["id"])
+    render :show
+  end
+
+  def edit
+    @user = User.find(params["id"])
+    render :edit
+  end
+
+  def update
+    right_now = DateTime.now
+    @user = User.find(params["id"])
+    @user.update(user_params)
+    @user.updated_at = right_now
+    redirect_to :root
+  end
+
   private
   def user_params
     params.permit(:username, :email, :password, :confirmation)

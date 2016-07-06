@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   get "logins/:id/delete", to: "logins#delete", as: "logouts"
 
   get "new_users/new", to: "new_users#new", as: "users_new"
+  get "profile/:id", to: "new_users#show", as: "profile"
+  get "profile/:id", to: "new_users#edit", as: "edit_profile"
+  get "profile/:id/update", to: "new_users#update", as: "update_profile"
   post "new_users", to: "new_users#create", as: "register_users"
 
   post "posts/:id", to: "comments#create", as: "comment_on_post"

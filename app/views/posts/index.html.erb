@@ -7,6 +7,9 @@
 
   <div class="title_div">
     BLOG POSTINGS
+    <div class="post_count">
+      SHOWING <%= Post.all.count %> POSTS
+    </div>
   </div>
 
     <% @posts.each do |post| %>
@@ -75,7 +78,6 @@
             </div>
           </div>
     <% end %>
-  </ul>
 </div>
-<% scope = Post.all.page(params[:page]).per(10) %>
+<% scope = Post.page(params[:page]).per(10) %>
   <%= paginate(scope) %>

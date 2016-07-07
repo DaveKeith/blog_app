@@ -93,7 +93,7 @@
   </br>
   <%=  form_tag(comment_on_post_path(@post.id)) do %>
       <div class="post-field">
-          <b><%= label_tag("Write Comment Here: ") %></b> <br/>
+          <b><%= label_tag("Comment on the Post Here: ") %></b> <br/>
           <%= text_area_tag("body") %>
       </div>
 
@@ -101,6 +101,7 @@
         Post Comment
       </button>
   <% end %>
+  <br>
 </div>
 <% scope = @post.comments.page(params[:page]).per(10) %>
   <%= paginate(scope) %>

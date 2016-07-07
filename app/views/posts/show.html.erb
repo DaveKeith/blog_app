@@ -31,54 +31,56 @@
           <span class="card-title">
             <%= comment.body %>
           </span>
-          <div class="links_and_info">
-            <p><i>comment posted by
-              <% poster= User.find_by(id: comment.user_id) %>
-            <b><u><%= poster.username %></u></b>
-            <%= time_ago_in_words(comment.updated_at) %> ago </i><br>
-            <%=link_to("display comment (lets you view and make comments)",
-          comments_display_path(comment.id)) %><br><br>
-          <% num_of_comments = Comment.where(comment_id: comment.id) %>
-          <% if num_of_comments[0] %>
-            <i><%= num_of_comments.size %> comments (last comment made by <b><u><%= poster.username %></u></b>
-            <%= time_ago_in_words(num_of_comments.last.created_at) %> ago)</i>
-          <% else %>
-            <i>no comments</i>
-          <% end %>
-          </div>
-            <div class="votes">
-              <% u = CommentVote.where(:upvote => true, :comment_id => comment.id) %>
-              <% d = CommentVote.where(:upvote => false, :comment_id => comment.id) %>
-              <% upvotes = u.size %>
-              <% downvotes = d.size %>
-              <% if current_user %>
-                <% votes = CommentVote.where(:user_id => current_user.id, :comment_id => comment.id) %>
-                <% if !votes[0] %>
-                  <div class="vote_here">vote here</div>
-                  <%= link_to image_tag("thumbs-up-512.png", {height: 25}), comment_upvote_path(comment.id) %>
+          <div class="mid_card">
+            <div class="links_and_info">
+              <p><i>comment posted by
+                <% poster= User.find_by(id: comment.user_id) %>
+              <b><u><%= poster.username %></u></b>
+              <%= time_ago_in_words(comment.updated_at) %> ago </i><br>
+              <%=link_to("display comment (lets you view and make comments)",
+            comments_display_path(comment.id)) %><br><br>
+            <% num_of_comments = Comment.where(comment_id: comment.id) %>
+            <% if num_of_comments[0] %>
+              <i><%= num_of_comments.size %> comments (last comment made by <b><u><%= poster.username %></u></b>
+              <%= time_ago_in_words(num_of_comments.last.created_at) %> ago)</i>
+            <% else %>
+              <i>no comments</i>
+            <% end %>
+            </div>
+              <div class="votes">
+                <% u = CommentVote.where(:upvote => true, :comment_id => comment.id) %>
+                <% d = CommentVote.where(:upvote => false, :comment_id => comment.id) %>
+                <% upvotes = u.size %>
+                <% downvotes = d.size %>
+                <% if current_user %>
+                  <% votes = CommentVote.where(:user_id => current_user.id, :comment_id => comment.id) %>
+                  <% if !votes[0] %>
+                    <div class="vote_here">vote here</div>
+                    <%= link_to image_tag("thumbs-up-512.png", {height: 25}), comment_upvote_path(comment.id) %>
+                    <%= upvotes %>
+                    <%= link_to image_tag("thumbs-down-512.png", {height: 25}), comment_downvote_path(comment.id) %>
+                    <%= downvotes %>
+                  <% elsif votes[0].upvote == true && votes[0].downvote == false%>
+                    <div class="upvoted">upvoted</div>
+                    <%= link_to image_tag("thumbs-up-512.png", {height: 25}), comment_vote_undo_path(comment.id) %>
+                    <%= upvotes %>
+                    <%= link_to image_tag("thumbs-down-512.png", {height: 25}), comment_vote_undo_path(comment.id) %>
+                    <%= downvotes %>
+                  <% elsif votes[0].upvote == false && votes[0].downvote == true%>
+                    <div class="downvoted">downvoted</div>
+                    <%= link_to image_tag("thumbs-up-512.png", {height: 25}), comment_vote_undo_path(comment.id) %>
+                    <%= upvotes %>
+                    <%= link_to image_tag("thumbs-down-512.png", {height: 25}), comment_vote_undo_path(comment.id) %>
+                    <%= downvotes %>
+                    <% end %>
+                <% else %>
+                  <div class="vote_here">log in to vote</div>
+                  <%= image_tag("thumbs-up-512.png", {height: 25}) %>
                   <%= upvotes %>
-                  <%= link_to image_tag("thumbs-down-512.png", {height: 25}), comment_downvote_path(comment.id) %>
+                  <%= image_tag("thumbs-down-512.png", {height: 25}) %>
                   <%= downvotes %>
-                <% elsif votes[0].upvote == true && votes[0].downvote == false%>
-                  <div class="upvoted">upvoted</div>
-                  <%= link_to image_tag("thumbs-up-512.png", {height: 25}), comment_vote_undo_path(comment.id) %>
-                  <%= upvotes %>
-                  <%= link_to image_tag("thumbs-down-512.png", {height: 25}), comment_vote_undo_path(comment.id) %>
-                  <%= downvotes %>
-                <% elsif votes[0].upvote == false && votes[0].downvote == true%>
-                  <div class="downvoted">downvoted</div>
-                  <%= link_to image_tag("thumbs-up-512.png", {height: 25}), comment_vote_undo_path(comment.id) %>
-                  <%= upvotes %>
-                  <%= link_to image_tag("thumbs-down-512.png", {height: 25}), comment_vote_undo_path(comment.id) %>
-                  <%= downvotes %>
-                  <% end %>
-              <% else %>
-                <div class="vote_here">log in to vote</div>
-                <%= image_tag("thumbs-up-512.png", {height: 25}) %>
-                <%= upvotes %>
-                <%= image_tag("thumbs-down-512.png", {height: 25}) %>
-                <%= downvotes %>
-              <% end %>
+                <% end %>
+              </div>
             </div>
             <% if comment.user_id == u_id %>
             <div class="card-action">

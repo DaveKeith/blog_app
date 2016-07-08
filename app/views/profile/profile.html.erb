@@ -9,9 +9,9 @@
   <div class="stats">
     <% posts_made = Post.where(user_id: @user.id).size %>
     <% comments_made = Comment.where(user_id: @user.id).size %>
-    <b>posts made: </b><%= posts_made %><br>
-    <b>comments made: </b><%= comments_made %><br>
-    <b>total cards (posts and comments) made: </b><%= posts_made + comments_made %><br><br>
+    <b>posts made by <%=@user.username%>: </b><%= posts_made %><br>
+    <b>comments made by <%=@user.username%>: </b><%= comments_made %><br>
+    <b>total cards (posts and comments) made by <%=@user.username%>: </b><%= posts_made + comments_made %><br><br>
     <% user_posts = Post.where(user_id: @user.id) %>
     <% user_comments = Comment.where(user_id: @user.id) %>
     <% user_post_votes = [] %>
@@ -46,10 +46,10 @@
       <% end %>
     <% end %>
     <% net_score_to_user = upvotes_to_user - downvotes_to_user %>
-    <b>upvotes given to your cards: </b><%= upvotes_to_user %><br>
-    <b>downvotes given to your cards: </b><%= downvotes_to_user %><br>
-    <b>net score (upvotes - downvotes) given to your cards: </b><%= net_score_to_user %><br>
-    <b>total votes given to your cards:</b> <%= total_votes_to_user %> <br><br>
+    <b>upvotes given to <%=@user.username%>'s cards: </b><%= upvotes_to_user %><br>
+    <b>downvotes given to <%=@user.username%>'s cards: </b><%= downvotes_to_user %><br>
+    <b>net score (upvotes - downvotes) given to <%=@user.username%>'s cards: </b><%= net_score_to_user %><br>
+    <b>total votes given to <%=@user.username%>'s cards:</b> <%= total_votes_to_user %> <br><br>
     <% post_votes_given = PostVote.where(user_id: @user.id) %>
     <% comment_votes_given = CommentVote.where(user_id: @user.id) %>
     <% total_votes_given = post_votes_given.size + comment_votes_given.size %>
@@ -60,10 +60,10 @@
     <% comment_downvotes_given = comment_votes_given.where(downvote: true).size %>
     <% downvotes_given = post_downvotes_given + comment_downvotes_given %>
     <% net_score_given = upvotes_given - downvotes_given %>
-    <b>upvotes you have given:</b> <%= upvotes_given %><br>
-    <b>downvotes you have given:</b> <%= downvotes_given %><br>
-    <b>net score you have given:</b> <%= net_score_given %><br>
-    <b>total votes you have given: </b> <%= total_votes_given %><br>
+    <b>upvotes <%=@user.username%> has given:</b> <%= upvotes_given %><br>
+    <b>downvotes <%=@user.username%> has given:</b> <%= downvotes_given %><br>
+    <b>net score <%=@user.username%> has given:</b> <%= net_score_given %><br>
+    <b>total votes <%=@user.username%> has given: </b> <%= total_votes_given %><br>
   </div>
   <br>
   <b>Posts and Comments:</b>

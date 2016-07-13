@@ -11,7 +11,7 @@
 
   <div class="poster2">
     <% commenter= User.find_by(id: @parent_comment.user_id) %>
-    comment posted by <%= commenter.username %>
+    comment posted by <%= link_to(commenter.username, profile_path(commenter.id)) %>
     <%= time_ago_in_words(@parent_comment.updated_at) %> ago
   </div>
 
@@ -41,7 +41,7 @@
             <div class="links_and_info">
               <p><i>comment posted by
                 <% poster= User.find_by(id: comment.user_id) %>
-              <b><u><%= poster.username %></u></b>
+              <b><u><%= link_to(poster.username, profile_path(poster.id)) %></u></b>
               <%= time_ago_in_words(comment.updated_at) %> ago </i><br>
               <%=link_to("display comment (lets you view and make comments)",
             comments_display_path(comment.id)) %><br><br>

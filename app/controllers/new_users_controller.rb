@@ -1,8 +1,4 @@
 class NewUsersController < ApplicationController
-  def new
-    render "new_user/new_user_login.html.erb"
-  end
-
   def create
     @user = User.new(user_params)
     # UserMailer.welcome_email(@user).deliver
@@ -12,7 +8,7 @@ class NewUsersController < ApplicationController
         redirect_to :root
       end
     else
-      render :new
+      render "new_user/new_user_login.html.erb"
     end
   end
 

@@ -18,7 +18,7 @@
               <b>Title:</b> <%= post.title %>
               <div class="poster">
                 <% poster= User.find_by(id: post.user_id) %>
-                posted by <b><u><%= poster.username %></u></b>
+                posted by <b><u><%= link_to(poster.username, profile_path(poster.id)) %></u></b>
                 <%= time_ago_in_words(post.updated_at) %> ago
               </div>
             </span>
@@ -36,7 +36,7 @@
                 <br>
                 <li><% num_of_comments = Comment.where(post_id: post.id) %>
                 <% if num_of_comments[0] %>
-                  <i><%= num_of_comments.size %> comments (last comment made by <b><u><%= poster.username %></u></b>
+                  <i><%= num_of_comments.size %> comments (last comment made by <b><u><%= link_to(poster.username, profile_path(poster.id)) %></u></b>
                   <%= time_ago_in_words(num_of_comments.last.updated_at) %> ago)</i></li>
                 <% else %>
                   <i>no comments</i>

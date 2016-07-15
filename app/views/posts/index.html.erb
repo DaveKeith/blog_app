@@ -15,7 +15,9 @@
     <% @posts.each do |post| %>
           <div class="card grey lighten-4">
             <span class="card-title">
-              <b>Title:</b> <%= post.title %>
+              <div class="post_title">
+                <b>Title:</b> <%= post.title %>
+              </div>
               <div class="poster">
                 <% poster= User.find_by(id: post.user_id) %>
                 posted by <b><u><%= link_to(poster.username, profile_path(poster.id)) %></u></b>

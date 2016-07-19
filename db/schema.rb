@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706163150) do
+ActiveRecord::Schema.define(version: 20160719224144) do
+
+  create_table "comment_views", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.time     "time_on_page"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "comment_votes", force: :cascade do |t|
     t.boolean  "upvote"
@@ -33,6 +41,21 @@ ActiveRecord::Schema.define(version: 20160706163150) do
     t.datetime "updated_at",       null: false
     t.text     "body"
     t.integer  "comment_id"
+  end
+
+  create_table "index_views", force: :cascade do |t|
+    t.integer  "user_id"
+    t.time     "time_on_page"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "post_views", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.time     "time_on_page"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "post_votes", force: :cascade do |t|

@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.page(params[:page]).per(10)
+    if current_user
+      @index_view = current_user.index_views.create
+    end
     render :index, locals: { posts: @posts }
   end
 
@@ -30,6 +33,9 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params["id"])
+    if current_user
+      @post_view = current_user.post_views.create(post_id: @post.id)
+    end
     @comments = @post.comments.page(params[:page]).per(10)
     render :show, locals: { comments: @comments }
   end

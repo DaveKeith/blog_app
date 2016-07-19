@@ -18,6 +18,9 @@ class CommentsController < ApplicationController
 
   def show
     @parent_comment = Comment.find(params["id"])
+    if current_user
+      @comment_view = current_user.comment_views.create(comment_id: @parent_comment.id)
+    end
     @comments = Comment.where(comment_id: @parent_comment.id)
     # @comments = @parent_comment.comments.page(params[:page]).per(10)
     render :show, locals: { comments: @comments }

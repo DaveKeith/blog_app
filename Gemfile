@@ -35,6 +35,7 @@ gem "paperclip"
 
 #add CORS
 gem 'rack-cors', require: "rack/cors"
+gem 'puma'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
